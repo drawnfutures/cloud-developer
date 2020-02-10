@@ -34,7 +34,7 @@ import { runInNewContext } from 'vm';
 
     let filteredPath = await filterImageFromURL(image_url).then(
       result => {
-        res.status(200).send(result);
+        res.status(200).sendFile(result);
         return result;
       })
     .catch(
@@ -42,11 +42,11 @@ import { runInNewContext } from 'vm';
       error => {
         res.status(400).send(error);
         return '';
+    })
+    .finally(
+      () => {
+        deleteLocalFiles([filteredPath])
     });
-
-    if (filteredPath != '') {
-      deleteLocalFiles([filteredPath]);
-    }
   });
   
   // Root Endpoint
