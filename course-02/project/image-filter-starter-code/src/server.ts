@@ -25,6 +25,12 @@ import {filterImageFromURL, deleteTmpFiles} from './util/util';
   // RETURNS
   //   the filtered image file
   app.get( "/filteredimage/", ( req, res ) => {
+
+    // Only allow authorized requests
+    if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {
+      return res.status(401).send({ message: 'Authorization header is required.' });
+    }
+
     let { image_url } = req.query;
 
     if (!image_url) {
