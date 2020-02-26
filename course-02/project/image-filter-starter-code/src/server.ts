@@ -34,7 +34,7 @@ import {filterImageFromURL, deleteTmpFiles} from './util/util';
     let { image_url } = req.query;
 
     if (!image_url) {
-      return res.status(400).send('image_url is required.');
+      return res.status(400).send({message: 'image_url is required.'});
     }
 
     let _ = filterImageFromURL(image_url).then(
