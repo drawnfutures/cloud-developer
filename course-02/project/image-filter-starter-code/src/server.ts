@@ -45,7 +45,7 @@ import {filterImageFromURL, deleteTmpFiles} from './util/util';
     .catch(
       // Surface the error from the util function
       error => {
-        res.status(422).send(error);
+        res.status(422).send({message: error});
         return '';
     })
     .then(
