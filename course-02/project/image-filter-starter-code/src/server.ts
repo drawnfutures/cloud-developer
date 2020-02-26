@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import {filterImageFromURL, deleteLocalFiles} from './util/util';
-import { runInNewContext } from 'vm';
+import {filterImageFromURL, deleteTmpFiles} from './util/util';
 
 (async () => {
 
@@ -24,15 +23,15 @@ import { runInNewContext } from 'vm';
   // QUERY PARAMATERS
   //    image_url: URL of a publicly accessible image
   // RETURNS
-  //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
-  app.get( "/filteredimage/", async ( req, res ) => {
+  //   the filtered image file
+  app.get( "/filteredimage/", ( req, res ) => {
     let { image_url } = req.query;
 
     if (!image_url) {
       return res.status(400).send('image_url is required.');
     }
 
-    let filteredPath = await filterImageFromURL(image_url).then(
+    let _ = filterImageFromURL(image_url).then(
       result => {
         res.status(200).sendFile(result);
         return result;
@@ -40,21 +39,21 @@ import { runInNewContext } from 'vm';
     .catch(
       // Surface the error from the util function
       error => {
-        res.status(400).send(error);
+        res.status(422).send(error);
         return '';
     })
-    .finally(
+    .then(
       () => {
-        deleteLocalFiles([filteredPath])
+        deleteTmpFiles();
     });
+    
   });
-  
+
   // Root Endpoint
   // Displays a simple message to the user
   app.get( "/", async ( req, res ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   });
-  
 
   // Start the Server
   app.listen( port, () => {
