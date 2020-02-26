@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "f9bba834-1aa3-4da2-b56f-64ce7e8ca4fd",
+		"name": "Udagram - Julie Phakoom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://image-filter-drawnfutures-dev-dev.us-east-2.elasticbeanstalk.com/filteredimage?image_url=https://static.scientificamerican.com/blogs/cache/file/3179218B-6138-442F-AA4D3E3EF7E98924_source.jpg",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://image-filter-drawnfutures-dev-dev.us-east-2.elasticbeanstalk.com/filteredimage?image_url=https://static.scientificamerican.com/blogs/cache/file/3179218B-6138-442F-AA4D3E3EF7E98924_source.jpg",
+					"protocol": "http",
+					"host": [
+						"image-filter-drawnfutures-dev-dev",
+						"us-east-2",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://static.scientificamerican.com/blogs/cache/file/3179218B-6138-442F-AA4D3E3EF7E98924_source.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
